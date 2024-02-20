@@ -1,13 +1,33 @@
-from abc import ABC
+"""This module defines a specilised engine named CapuletEngine,
+which is responsible for creating CapuletEngine objects.
+"""
+from datetime import datetime
+from engine.base_engine import Engine
+from secuirity.input_validator import validate_date, validate_int
 
-from car import Car
+# input validators
+class CapuletEngine(Engine):
+    """Creates CapuletEngine objects.
+    Inherits from the Engine class.
 
-
-class CapuletEngine(Car, ABC):
-    def __init__(self, last_service_date, current_mileage, last_service_mileage):
+    methods:
+        needs_serviced: Determines if the engine should be serviced.
+    """
+    def __init__(self, last_service_date: datetime,
+                 current_mileage: int,
+                 last_service_mileage: int):
+        """Initializes CapuletEngine objects."""
+        # validate input
+        last_service_date = validate_date(last_service_date)
+        current_mileage = validate_int(current_mileage, 'current_mileage')
+        last_service_mileage = validate_int(last_service_mileage, 'last_service_mileage')
         super().__init__(last_service_date)
         self.current_mileage = current_mileage
         self.last_service_mileage = last_service_mileage
 
-    def engine_should_be_serviced(self):
+    def needs_service(self):
+        """Determines if the engine should be serviced.
+        Returns:
+            bool: True if the engine should be serviced, False otherwise.
+        """
         return self.current_mileage - self.last_service_mileage > 30000
