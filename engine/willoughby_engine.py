@@ -24,7 +24,7 @@ class WilloughbyEngine(Engine):
         current_mileage = validate_int(current_mileage, 'current_mileage')
         last_service_mileage = validate_int(last_service_mileage, 'last_service_mileage')
 
-        super().__init__(last_service_date)
+        super().__init__()
         self.current_mileage = current_mileage
         self.last_service_mileage = last_service_mileage
 

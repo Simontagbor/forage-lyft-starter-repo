@@ -1,18 +1,25 @@
 """This Module contains functions to validate input data."""
 
-from datetime import datetime
+from datetime import datetime, date
 
-def validate_date(date):
+def validate_date(date_input):
     """Validates that the input is a datetime object or a string 
     that can be converted to a datetime object."""
-    if not isinstance(date, datetime):
+    if isinstance(date_input, datetime):
+        return date_input
+    elif isinstance(date_input, date):
+        return datetime(date_input.year, date_input.month, date_input.day)
+    elif isinstance(date_input, str):
         try:
-            return datetime.strptime(date, '%Y-%m-%d')
+            return datetime.strptime(date_input, '%Y-%m-%d')
         except ValueError as exc:
             raise TypeError(
-                "Date must be a datetime object or a string in 'YYYY-MM-DD' format"
+                "Date must be a datetime object, a date object, or a string in 'YYYY-MM-DD' format"
             ) from exc
-    return date
+    else:
+        raise TypeError(
+            "Date must be a datetime object, a date object, or a string in 'YYYY-MM-DD' format"
+        )
 
 def validate_int(number, variable_name):
     """Validates that the input is an integer or a string

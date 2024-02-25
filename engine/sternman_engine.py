@@ -19,7 +19,7 @@ class SternmanEngine(Engine):
         last_service_date = validate_date(last_service_date)
         warning_light_is_on = validate_bool(warning_light_is_on, 'warning_light_is_on')
         # initialize instance
-        super().__init__(last_service_date)
+        super().__init__()
         self.warning_light_is_on = warning_light_is_on
 
     def needs_service(self) -> bool:

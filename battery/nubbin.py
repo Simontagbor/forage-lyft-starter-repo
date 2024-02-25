@@ -19,9 +19,9 @@ class NubbinBattery(Battery):
         last_service_date = validate_date(last_service_date)
         current_date = validate_date(current_date)
         # initialize instance
-        super().__init__(last_service_date)
-        self.current_date = datetime.strptime(current_date)
-        self.last_service_date = datetime.strptime(last_service_date)
+        super().__init__()
+        self.current_date = current_date
+        self.last_service_date = last_service_date
 
 
     def needs_service(self) -> bool:
