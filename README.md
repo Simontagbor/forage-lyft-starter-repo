@@ -13,9 +13,11 @@ I inherited a convoluted inheritance hierarchy and messy codebase from the previ
 ## Before and After
 
 ### Before Redesign
-<!-- insert image -->
+![Current Design - LYFT Rental Fleet logistics System Component drawio (1)](https://github.com/Simontagbor/forage-lyft-starter-repo/assets/62922135/d01e815d-adfb-4f80-bb58-262fed483e47)
+
 ### After Redesign
-<!-- Insert image -->
+![Updated Design - LYFT Rental Fleet logistics System Component (1)](https://github.com/Simontagbor/forage-lyft-starter-repo/assets/62922135/688433b2-60e7-474a-8414-38e28c0dfd70)
+
 
 ## Task 2 - Refactor and Optimize Codebase
 
@@ -70,4 +72,4 @@ The new structure also includes:
 
 - added the `serviceable.py` module to define the base class for the different types of vehicles.
 
-## Task 3 - Implement New Features
+## Task 3 - Write Unittests
