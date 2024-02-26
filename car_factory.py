@@ -31,9 +31,8 @@ class CarFactory(ABC):
         Returns:
             Car: car object.
         """
-        engine = CapuletEngine(last_service_date,
-                                        current_mileage,
-                                        last_service_mileage)
+        engine = CapuletEngine(current_mileage,
+                               last_service_mileage)
         battery = SpindlerBattery(last_service_date, current_date)
         calliope = Car(engine, battery)
         return calliope
@@ -53,9 +52,8 @@ class CarFactory(ABC):
         Returns:
             Car: car object.
         """
-        engine = WilloughbyEngine(last_service_date,
-                                        current_mileage,
-                                        last_service_mileage)
+        engine = WilloughbyEngine(current_mileage,
+                                  last_service_mileage)
         battery = SpindlerBattery(last_service_date, current_date)
         glissade = Car(engine, battery)
 
@@ -74,7 +72,7 @@ class CarFactory(ABC):
         Returns:
             Car: car object.
         """
-        engine = SternmanEngine(last_service_date, warning_light_is_on)
+        engine = SternmanEngine(warning_light_is_on)
         battery = SpindlerBattery(last_service_date, current_date)
         palindrome = Car(engine, battery)
 
@@ -95,9 +93,8 @@ class CarFactory(ABC):
         Returns:
             Car: car object.
         """
-        engine = WilloughbyEngine(last_service_date,
-                                        current_mileage,
-                                        last_service_mileage)
+        engine = WilloughbyEngine(current_mileage,
+                                  last_service_mileage)
         battery = NubbinBattery(last_service_date,
                                           current_date)
         rorschach = Car(engine, battery)
@@ -117,9 +114,8 @@ class CarFactory(ABC):
         Returns:
             Car: car object.
         """
-        engine = CapuletEngine(last_service_date,
-                                        current_mileage,
-                                        last_service_mileage)
+        engine = CapuletEngine(current_mileage,
+                               last_service_mileage)
         battery = NubbinBattery(last_service_date, current_date)
 
         thovex = Car(engine, battery)
