@@ -48,6 +48,7 @@ class TestCarFactory(unittest.TestCase):
         mock_car.assert_called_once_with(mock_engine.return_value, mock_battery.return_value)
         self.assertEqual(car, mock_car)
 
+
     def test_calliope_components(self):
         """Tests the creation of a Calliope engine and battery."""
         # Arrange
