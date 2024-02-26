@@ -3,7 +3,7 @@
 
 from datetime import datetime
 from battery.base_battery import Battery
-from secuirity.input_validator import validate_date
+from utils.input_validator import validate_date
 
 
 class NubbinBattery(Battery):
@@ -19,7 +19,6 @@ class NubbinBattery(Battery):
         last_service_date = validate_date(last_service_date)
         current_date = validate_date(current_date)
         # initialize instance
-        super().__init__()
         self.current_date = current_date
         self.last_service_date = last_service_date
 

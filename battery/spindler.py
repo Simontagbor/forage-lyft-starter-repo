@@ -3,7 +3,7 @@
 
 from datetime import datetime
 from battery.base_battery import Battery
-from secuirity.input_validator import validate_date
+from utils.input_validator import validate_date
 
 
 class SpindlerBattery(Battery):
@@ -17,9 +17,7 @@ class SpindlerBattery(Battery):
                  current_date: datetime):
         """Ïnitializes SpindlerBattery objects."""
         # validate input
-        last_service_date = validate_date(last_service_date)
         current_date = validate_date(current_date)
-        super().__init__()
         self.current_date = current_date
         self.last_service_date = last_service_date
 
@@ -32,5 +30,5 @@ class SpindlerBattery(Battery):
             >>> battery = SpindlerBattery(....)
             >>> battery.needs_service()
         """
-        time_difference = (self.current_date - self.last_service_date)
-        return time_difference.days >= 730
+        service_time_threshold = self.current_date - self.last_service_date
+        return service_time_threshold.days >=  730
