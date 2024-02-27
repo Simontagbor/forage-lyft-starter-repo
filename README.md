@@ -56,7 +56,7 @@ The new directory structure is as follows:
 ```
 
 The new structure is based on the re-designed codebase in Task 1. The new structure is more organized and maintainable.
-Based on the `Factory Method Pattern`, We will not need to create new models to represent new fleets of cars. We can simply create a new class that inherits from the base class and implement the methods that are specific to the new fleet of cars. we will no longer need the `/engine/models/` directory where these specialized car models were defined.
+Based on the [`Factory Method Pattern`](https://refactoring.guru/design-patterns/factory-method), We will not need to create new models to represent new fleets of cars. We can simply create a new class that inherits from the base class and implement the methods that are specific to the new fleet of cars. we will no longer need the `/engine/models/` directory where these specialized car models were defined.
 
 The new structure also includes:
 
@@ -95,4 +95,8 @@ Mocking the creation of objects allows me to focus on testing the functionality 
 ### Test Coverage
 
 In total, the code coverage is about 98% and all tests 71 tests pass. The only module not tested is the `serviceable.py` which is an interface for serviceable objects like cars, engines, and batteries. I can safely assume that the interface is correctly implemented since all the derived classes from the interface are acting as expected.
-<!-- insert image -->
+```
+python3 -m unittest -v
+```
+![Screenshot 2024-02-27 121019](https://github.com/Simontagbor/forage-lyft-starter-repo/assets/62922135/4a077316-d855-40f9-a8ed-cca219856b99)
+
