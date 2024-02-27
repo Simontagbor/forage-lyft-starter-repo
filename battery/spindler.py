@@ -31,4 +31,4 @@ class SpindlerBattery(Battery):
             >>> battery.needs_service()
         """
         service_time_threshold = self.current_date - self.last_service_date
-        return service_time_threshold.days >=  730
+        return service_time_threshold.days >=  1095
