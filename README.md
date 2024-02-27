@@ -13,9 +13,11 @@ I inherited a convoluted inheritance hierarchy and messy codebase from the previ
 ## Before and After
 
 ### Before Redesign
+
 ![Current Design - LYFT Rental Fleet logistics System Component drawio (1)](https://github.com/Simontagbor/forage-lyft-starter-repo/assets/62922135/d01e815d-adfb-4f80-bb58-262fed483e47)
 
 ### After Redesign
+
 ![Updated Design - LYFT Rental Fleet logistics System Component (1)](https://github.com/Simontagbor/forage-lyft-starter-repo/assets/62922135/688433b2-60e7-474a-8414-38e28c0dfd70)
 
 
@@ -48,7 +50,7 @@ The new directory structure is as follows:
 |   ├── test
 |   |   ├── __init__.py
 |   |   ├── test_car.py
-|   ├── security
+|   ├── utils
 |   |   |── __init__.py
 |   |   ├── input_validator.py
 ```
@@ -73,3 +75,24 @@ The new structure also includes:
 - added the `serviceable.py` module to define the base class for the different types of vehicles.
 
 ## Task 3 - Write Unittests
+
+I wrote unittests to test the new codebase. The unittests are located in the `test` directory. The unittests cover the following:
+
+- Test the creation of different types of vehicles.
+- Test the creation of different types of engines.
+- Test the creation of different types of batteries.
+- Test that the Base Engine and Base Battery classes are correctly implemented.
+- Test that the derived classes from the Base Engine and Base Battery classes are correctly implemented.
+- Test the input validation for creating components and cars.
+
+### Testing Approach
+
+I mostly wrote standard unittests, however I used `@patch`decorator to mock the creation of different types of vehicles, engines, and batteries using the `Factory Method Pattern`- Implemented Via `car_factory.py` module.
+This is to ensure that the tests are independent of the client that uses them.
+
+Mocking the creation of objects allows me to focus on testing the functionality of the code in isolation, without relying on the specific details of the instantiated objects.
+
+### Test Coverage
+
+In total, the code coverage is about 98% and all tests 71 tests pass. The only module not tested is the `serviceable.py` which is an interface for serviceable objects like cars, engines, and batteries. I can safely assume that the interface is correctly implemented since all the derived classes from the interface are acting as expected.
+<!-- insert image -->
