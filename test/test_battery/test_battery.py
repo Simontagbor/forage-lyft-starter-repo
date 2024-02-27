@@ -3,7 +3,7 @@
 
 import unittest
 from abc import ABC
-from datetime import datetime, timedelta
+from datetime import datetime
 from battery.base_battery import Battery
 from battery.nubbin import NubbinBattery
 from battery.spindler import SpindlerBattery
