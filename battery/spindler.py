@@ -8,6 +8,7 @@ from utils.input_validator import validate_date
 
 class SpindlerBattery(Battery):
     """Creates SpindlerBattery instances.
+
     Inherits from the Battery class.
 
     methods:
@@ -24,11 +25,13 @@ class SpindlerBattery(Battery):
 
     def needs_service(self) -> bool:
         """Determines if the Spindler Battery should be serviced.
-        Returns:
-            bool: True if it's been Two years(730 days) since the last service date.
+
+        Returns True if it's been Two years(730 days) since the last service date
+        and False if otherwise.
+
         Usage:
-            >>> battery = SpindlerBattery(....)
-            >>> battery.needs_service()
+            battery = SpindlerBattery(....)
+            battery.needs_service()
         """
         service_time_threshold = self.current_date - self.last_service_date
         return service_time_threshold.days >=  1095
