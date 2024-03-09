@@ -1,7 +1,7 @@
 """This Module Tests the utility functions in the input_validator module."""
 import unittest
 from datetime import datetime, date
-from utils.input_validator import validate_date, validate_int, validate_bool
+from utils.input_validator import validate_date, validate_int, validate_bool, validate_array
 
 
 class TestInputValidator(unittest.TestCase):
@@ -56,6 +56,39 @@ class TestInputValidator(unittest.TestCase):
         """Test that the validate_bool function raises an error for invalid input"""
         with self.assertRaises(TypeError):
             validate_bool('abc', 'test')
+    # test array validator
+    def test_validate_array_returns_list(self):
+        """Test that the validate_array function returns a list"""
+        self.assertIsInstance(validate_array([1, 2, 3], 'test'), list)
+
+    def test_validate_array_returns_correct_list(self):
+        """Test that the validate_array function returns the correct list"""
+        self.assertEqual(validate_array([1, 2, 3], 'test'), [1, 2, 3])
+
+    def test_validate_array_returns_correct_list_from_string(self):
+        """Test that the validate_array function returns the correct list from a string"""
+        self.assertEqual(validate_array('1,2,3', 'test'), [1, 2, 3])
+
+    def test_validate_array_raises_error(self):
+        """Test that the validate_array function raises an error for invalid input"""
+        with self.assertRaises(TypeError):
+            validate_array(123, 'test')
+
+    def test_validate_array_raises_error_for_invalid_string(self):
+        """Test that the validate_array function raises an error for invalid string input"""
+        with self.assertRaises(TypeError):
+            validate_array('abc', 'test')
+
+    def test_validate_array_raises_error_for_invalid_list(self):
+        """Test that the validate_array function raises an error for invalid list input"""
+        invalid_input = {"not": "a list"} 
+        with self.assertRaises(TypeError):
+            validate_array(invalid_input, "invalid_input")
+
+    def test_validate_array_raises_error_for_invalid_list_string(self):
+        """Test that the validate_array function raises an error for invalid list string input"""
+        with self.assertRaises(TypeError):
+            validate_array('1,a,3', 'test')
 
 
 if __name__ == '__main__':
