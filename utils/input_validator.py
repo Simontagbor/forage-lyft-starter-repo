@@ -46,3 +46,21 @@ def validate_bool(value, variable_name):
             be converted to a boolean ('true' or 'false')"
         )
     return value
+
+def validate_array(array, variable_name):
+    """Validates that the input is a list or a string that can be 
+    converted to a list."""
+    if not isinstance(array, list):
+        if isinstance(array, str):
+            try:
+                return list(map(float, array.split(',')))
+            except ValueError as exc:
+                raise TypeError(
+                    f"{variable_name} must be a list or a string that can \
+                    be converted to a list"
+                ) from exc
+        raise TypeError(
+            f"{variable_name} must be a list or a string that can be \
+            converted to a list"
+        )
+    return array
