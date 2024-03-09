@@ -1,12 +1,4 @@
-"""Tests for the CarFactory class.
-This module contains the following test classes:
-    TestCarFactory: Tests the CarFactory class.
-
-    Summary of:
-            test_create_[car_type]: Tests the Factory methods designed for 
-            creating specialised instances of the  Car class.
-            test_[car_type]_components: Currently Tests the engine and battery components of created Car objects.
-"""
+"""Tests for the CarFactory class."""
 import unittest
 from unittest.mock import patch, MagicMock
 from datetime import datetime
@@ -22,7 +14,10 @@ from battery.nubbin import NubbinBattery
 
 
 class TestCarFactory(unittest.TestCase):
-    """Tests the CarFactory class."""
+    """Tests the CarFactory class.
+
+    Tests the creation of specialised instances of the Car class.
+    """
     @patch('car_factory.Car', autospec=True)
     @patch('car_factory.CapuletEngine')
     @patch('car_factory.SpindlerBattery')

@@ -1,5 +1,4 @@
-"""This module defines a specilised engine named CapuletEngine,
-which is responsible for creating CapuletEngine objects.
+"""This module defines a specilised engine named CapuletEngine.
 """
 from engine.base_engine import Engine
 from utils.input_validator import  validate_int
@@ -7,6 +6,7 @@ from utils.input_validator import  validate_int
 
 class CapuletEngine(Engine):
     """Creates CapuletEngine objects.
+
     Inherits from the Engine class.
 
     methods:
@@ -22,7 +22,8 @@ class CapuletEngine(Engine):
         self.last_service_mileage = last_service_mileage
 
     def needs_service(self):
-        """Determines if the engine should be serviced.
+        """Determines if the engine should be serviced
+
         Returns:
             bool: True if the engine should be serviced, False otherwise.
         """

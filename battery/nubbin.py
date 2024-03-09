@@ -8,6 +8,7 @@ from utils.input_validator import validate_date
 
 class NubbinBattery(Battery):
     """Creates NubbinBattery instances.
+
     Inherits from the Battery class.
 
     methods:
@@ -25,9 +26,13 @@ class NubbinBattery(Battery):
 
     def needs_service(self) -> bool:
         """Determines if the NubbinBattery should be serviced.
+
+        Returns True if the battery needs service, False otherwise.
+
         Usage:
-            >>> battery = NubbinBattery(....)
-            >>> battery.needs_service()
+
+            battery = NubbinBattery(....)
+            battery.needs_service()
         """
         service_time_threshold = self.current_date - self.last_service_date
         return service_time_threshold.days >= 1460

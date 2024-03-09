@@ -26,7 +26,7 @@ class SpindlerBattery(Battery):
     def needs_service(self) -> bool:
         """Determines if the Spindler Battery should be serviced.
 
-        Returns True if it's been Two years(730 days) since the last service date
+        Returns True if it's been three years(1095 days) since the last service date
         and False if otherwise.
 
         Usage:

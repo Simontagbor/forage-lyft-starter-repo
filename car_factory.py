@@ -12,6 +12,7 @@ from engine.sternman_engine import SternmanEngine
 from battery.spindler import SpindlerBattery
 from battery.nubbin import NubbinBattery
 
+
 class CarFactory(ABC):
     """This class is responsible for creating different types of Car objects.
     """
@@ -24,9 +25,9 @@ class CarFactory(ABC):
 
         Args:
            current_date (datetime): The current date.
-            last_service_date (datetime): The date when the car was last serviced.
-            current_mileage (int): The current mileage of the car.
-            last_service_mileage (int): The mileage when the car was last serviced.
+           last_service_date (datetime): The date when the car was last serviced.
+           current_mileage (int): The current mileage of the car.
+           last_service_mileage (int): The mileage when the car was last serviced.
 
         Returns:
             Car: car object.

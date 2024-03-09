@@ -1,11 +1,12 @@
-"""This module defines a specilised engine named SternmanEngine,
-which is responsible for creating SternmanEngine objects.
+"""This module defines a specilised engine named SternmanEngine.
 """
 from engine.base_engine import Engine
 from utils.input_validator import validate_bool
 
+
 class SternmanEngine(Engine):
     """Creates SternmanEngine objects.
+
     Inherits from the Engine class.
 
     methods:
@@ -18,10 +19,10 @@ class SternmanEngine(Engine):
 
     def needs_service(self) -> bool:
         """Determines if the engine should be serviced.
+
         Returns:
             bool: True if the warning light is on False otherwise.
         """
         if self.warning_light_is_on:
             return True
         return False
-

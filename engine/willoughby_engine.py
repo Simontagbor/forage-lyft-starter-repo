@@ -1,12 +1,12 @@
-"""This module defines a specilised engine named WilloughbyEngine,
-which is responsible for creating SternmanEngine objects.
+"""This module defines a specilised engine named WilloughbyEngine.
 """
 from engine.base_engine import Engine
-from utils.input_validator import  validate_int
+from utils.input_validator import validate_int
 
 
 class WilloughbyEngine(Engine):
     """Creates WilloughbyEngine objects.
+
     Inherits from the Engine class.
 
     methods:
@@ -25,6 +25,7 @@ class WilloughbyEngine(Engine):
 
     def needs_service(self):
         """Determines if the WilloughbyEngine should be serviced.
+
         Returns:
             bool: True if the last service mileage exceeds 60000, False otherwise.
         """
