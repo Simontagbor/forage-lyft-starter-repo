@@ -1,0 +1,996 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.450">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Simon’s Dev Notes - What I learned as a Junior Backend Software Engineer at Lyft - A Forage Job Simulation Experience</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./assets/favicon.ico" rel="icon">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script type="text/javascript" src="assets/modal.js"></script>
+
+
+<link rel="stylesheet" href="assets/style.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">Simon’s Dev Notes</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a id="nav-link-projects" class="nav-link active" rel="" target="" aria-current="page">
+ <span class="menu-text">Projects</span></a>
+  </li>  
+  <li class="nav-item">
+    <a id="nav-link-about" class="nav-link"  rel="" target="">
+ <span class="menu-text">About Me</span></a>
+  </li>  
+  <li class="nav-item">
+    <a id="nav-link-contact" class="nav-link" rel="" target="">
+ <span class="menu-text">Contact</span></a>
+  </li>  
+</ul>
+            <div class="quarto-navbar-tools ms-auto tools-wide">
+    <a href="https://twitter.com/clawd_johan" rel="" title="" class="quarto-navigation-tool px-1" aria-label=""><i class="bi bi-twitter"></i></a>
+    <a href="https://github.com/Simontagbor" rel="" title="" class="quarto-navigation-tool px-1" aria-label=""><i class="bi bi-github"></i></a>
+    <div class="dropdown">
+      <a href="https://www.kaggle.com/simontagbor" title="" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" aria-label=""><i class="bi bi-kaggle"></i></a>
+      <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="quarto-navigation-tool-dropdown-0">
+          <li>
+            <a class="dropdown-item quarto-navbar-tools ms-auto-item" href="https://github.com/Simontagbor/forage-lyft-starter-repo">
+            Source Code
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item quarto-navbar-tools ms-auto-item" href="https://bugs.com">
+            Report a Bug
+            </a>
+          </li>
+      </ul>
+    </div>
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Contents</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#situation" id="toc-situation" class="nav-link" data-scroll-target="#situation">Situation</a></li>
+  <li><a href="#tasks" id="toc-tasks" class="nav-link" data-scroll-target="#tasks">Tasks</a></li>
+  <li><a href="#actions" id="toc-actions" class="nav-link" data-scroll-target="#actions">Actions</a>
+  <ul class="collapse">
+  <li><a href="#backend-business-logic-re-design" id="toc-backend-business-logic-re-design" class="nav-link" data-scroll-target="#backend-business-logic-re-design">1. Backend Business Logic Re-Design</a></li>
+  <li><a href="#codebase-refactoring" id="toc-codebase-refactoring" class="nav-link" data-scroll-target="#codebase-refactoring">2. Codebase Refactoring</a></li>
+  <li><a href="#extensive-unit-testing-of-the-codebase" id="toc-extensive-unit-testing-of-the-codebase" class="nav-link" data-scroll-target="#extensive-unit-testing-of-the-codebase">3. Extensive Unit testing of the Codebase</a></li>
+  <li><a href="#task-4---implement-new-tire-servicing-criteria" id="toc-task-4---implement-new-tire-servicing-criteria" class="nav-link" data-scroll-target="#task-4---implement-new-tire-servicing-criteria">Task 4 - Implement New Tire Servicing Criteria</a></li>
+  </ul></li>
+  <li><a href="#results" id="toc-results" class="nav-link" data-scroll-target="#results">Results</a>
+  <ul class="collapse">
+  <li><a href="#sanitized-codebase-at-a-glance" id="toc-sanitized-codebase-at-a-glance" class="nav-link" data-scroll-target="#sanitized-codebase-at-a-glance">Sanitized Codebase at a Glance</a></li>
+  </ul></li>
+  <li><a href="#key-learning-outcomes" id="toc-key-learning-outcomes" class="nav-link" data-scroll-target="#key-learning-outcomes">Key Learning Outcomes</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content page-columns page-full" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">What I learned as a Junior Backend Software Engineer at Lyft - A Forage Job Simulation Experience</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<div class="column-page">
+<div class="herosection-title">
+
+</div>
+</div>
+<div class="column-page">
+<p><em>Tags:</em> <span class="badge bg-secondary">Design Patterns</span> <span class="badge bg-secondary">Python Programming</span> <span class="badge bg-secondary">Test Driven Development</span> <span class="badge bg-secondary">Unittesting</span></p>
+</div>
+<div class="column-page">
+<p><img class="hero-image" src="assets/heroimage2.webp" alt="Lyft Image"></p>
+</div>
+<div class="column-page">
+<div>
+<p>
+Author: <a href="https://www.linkedin.com/in/tagbor-simon-gabriel/" style="color: blue; text-decoration:none;">Simon Tagbor</a> 📅 10th March, 2024
+</p>
+</div>
+</div>
+<section id="introduction" class="level2 column-page">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+</section>
+<div class="column-page">
+<section class="intro-section">
+<div class="intro">
+<p>
+I did a job simulation as a junior backend software engineer at Lyft on <a href="https://www.theforage.com/virtual-experience/xSw9echtixLAoPdsH/lyft/back-end-engineering-he82/">Forage</a>.
+</p>
+<p>
+The goal was straight forward:
+</p>
+<figure class="text-center figure">
+<blockquote class="blockquote">
+<p class="mb-0">
+Implement a Re-design of an Existing Codebase for Lyft’s Rental Fleet Logistics System.
+</p>
+</blockquote>
+</figure>
+<p>
+The New design is expected to make the Codebase more modular and scalable.
+</p>
+<p>
+The implementation of the new design is also expected to have extensive test coverage
+</p>
+<p>
+If you’re curious about trying this job simulation feel free to check out the full experience on <a href="https://www.theforage.com/virtual-experience/xSw9echtixLAoPdsH/lyft/back-end-engineering-he82">Forage</a>
+</p>
+<p>
+I Thoroughly enjoyed the experience and in this blog post, I will share the main highlights of my process.
+</p>
+<p>
+Feel free to reach out to me on X <a href="https://twitter.com/clawd_johan"><span class="citation" data-cites="clawd_johan">@clawd_johan</span></a> if you have any questions or feedback.
+</p>
+</div>
+<script src="./assets/modal.js"></script>
+
+
+<!-- The button that opens the modal -->
+<button id="myBtn" class="btn btn-outline-primary">
+Show Project Summary
+</button>
+</section>
+</div>
+<p>
+Let’s begin by looking at the context of the problem and the existing codebase.
+</p>
+<section id="situation" class="level2">
+<h2 class="anchored" data-anchor-id="situation">Situation</h2>
+<p>
+I inherited a codebase from a previous engineer who started working on a new system for managing the maintenance of the types of vehicles in LYFT’s rental fleet. The previous engineer had to be assigned to another project. As a junior backend engineer, I was tasked to build on his existing work
+</p>
+<p>
+From an <a href="https://en.wikipedia.org/wiki/Object-oriented_programming">Object Oriented Program design</a> perspective, the codebase left behind by the engineer is not easily extensible and maintainable. The design relies almost entirely on <a href="https://en.wikipedia.org/wiki/Inheritance_(object-oriented_programming)">inheritance</a> to model vehicles in LYFT’s rental fleet, complete with their servicing criteria.
+</p>
+<p>
+Consequently, the codebase has been riddled with components that have deep inheritance hierarchies. Servicing criteria may change frequently as LYFT’s rental fleet evolves. Introducing new updates in the current codebase will require making changes to many parts of the codebase, thereby increasing the chances of introducing several time-consuming bugs while also running the risk of duplicating code
+</p>
+<p>
+Even more so, the codebase lacks unit tests with extensive coverage. LYFT fleet management system would be better off with a new and extensively tested design of the backend business logic
+</p>
+</section>
+<section id="tasks" class="level2">
+<h2 class="anchored" data-anchor-id="tasks">Tasks</h2>
+<p>
+For this project, I completed the following tasks:
+</p>
+<ul class="list-group">
+<li class="list-group-item d-flex justify-content-between align-items-center">
+Task 1: Re-designed backend Business Logic for Fleet Management System. <span>✅</span>
+</li>
+<li class="list-group-item d-flex justify-content-between align-items-center">
+Task 2: Refactored and Optimized Codebase <span>✅</span>
+</li>
+<li class="list-group-item d-flex justify-content-between align-items-center">
+Task 3: Wrote Extensive Unittests <span>✅</span>
+</li>
+<li class="list-group-item d-flex justify-content-between align-items-center">
+Task 4: Implement a New Tire Servicing Criteria. <span>✅</span>
+</li>
+</ul>
+</section>
+<section id="actions" class="level2">
+<h2 class="anchored" data-anchor-id="actions">Actions</h2>
+<section id="backend-business-logic-re-design" class="level3">
+<h3 class="anchored">1. Backend Business Logic Re-Design</h3>
+<section id="design-challenges-with-the-existing-codebase" class="level4">
+<h4 class="anchored">Design Challenges With The Existing Codebase</h4>
+<img src="https://github.com/Simontagbor/forage-lyft-starter-repo/assets/62922135/d01e815d-adfb-4f80-bb58-262fed483e47" alt="Current Design - LYFT Rental Fleet logistics System Component drawio (1)" style="width:100%;height:60%; margin-bottom:5px;">
+<p>
+As can be seen from the above <a href="https://en.wikipedia.org/wiki/Unified_Modeling_Language">UML diagram</a>, The Previous Engineer used a convoluted inheritance hierarchy to handle the different types of vehicles in the fleet.
+</p><p>
+The Engineer created different car models in LYFT’s fleet by subclassing three unique engine types which are also by themselves, an extension of <code>Car</code> and <code>ABC</code> parent classes.
+</p>
+<h4 class="anchored">
+The 3 Key Pain Points Identified in the Existing Codebase:
+</h4>
+<ul class="list-group">
+<li class="list-group-item d-flex justify-content-between align-items-center">
+<p>
+</p><ol type="1">
+<li>Difficulty in adding new vehicle types to the fleet.
+<p></p>
+</li>
+<li class="list-group-item d-flex justify-content-between align-items-center">
+<p>
+</p><ol start="2" type="1">
+<li>Managing Variations in Vehicle Features will be Cumbersome.
+<p></p>
+</li>
+<li class="list-group-item d-flex justify-content-between align-items-center">
+<p>
+</p><ol start="3" type="1">
+<li>Convoluted Inheritance Hierarchy makes the codebase tightly coupled
+<p></p>
+</li>
+</ol></li></ol></li></ol></li></ul>
+<h4 class="anchored">
+Finding Solutions
+</h4>
+<p>
+After gathering enough details about the goals of the fleet management system and familiarising myself with the codebase, I looked into design patterns that could help address the key design challenges.
+
+
+
+</p>
+<p>
+I used a combination of design patterns and object-oriented program design principles to sanitize the codebase. The thought process behind the design choices is further discussed below:
+</p>
+<div class="accordion" id="accordionExample">
+<div class="accordion-item">
+<h2 class="accordion-header anchored" id="headingOne" data-anchor-id="design-challenges-with-the-existing-codebase">
+<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne" style="border-left:none;">
+Strategy Design Pattern
+</button>
+</h2>
+<div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample" style="">
+<div class="accordion-body">
+<strong class="text-secondary">Strategy Design Pattern</strong>
+<p>
+This design pattern choice felt more natural for instances where we will be handling different vehicles with unique algorithms for determining servicing needs. A typical strategy design pattern approach would involve creating a <code>Serviceable</code> interface - an abstract class of anything that can be serviced with a <code>needs_service</code> abstract method. Different <code>Car</code> subclasses of the interface would then encapsulate their own <code>needs_service</code> algorithms for determining when its instances should be serviced.
+</p>
+<p>
+The strategy design pattern makes it more straightforward to add new vehicles and it also ensures that each new <code>Car</code> variant has its own <em><strong>strategy</strong></em> for determining servicing needs implemented. For instance, LYFT may decide in the future to add a <code>Motorbike</code> and <code>Segway</code> to its fleet. The <code>Serviceable</code> interface makes it easier to extend the codebase to meet the new requirements with fewer breaking changes. You can read more about about The strategy design pattern <a href="https://refactoring.guru/design-patterns/strategy">Here</a>
+</p>
+</div>
+</div>
+</div>
+<div class="accordion" id="accordionExample">
+<div class="accordion-item">
+<h2 class="accordion-header anchored" id="headingOne">
+<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne" style="border-left:none;">
+Factory Design Pattern
+</button>
+</h2>
+<div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample" style="">
+<div class="accordion-body">
+<strong class="text-secondary">Factory Design Pattern</strong>
+<p>
+Considering that our fleet management system will be instantiating several vehicle types across the codebase, it will be helpful to use a <a href="https://sourcemaking.com/design_patterns/creational_patterns">creational design parttern</a> to organize the logic of how vehicles in the fleet get created in one place. Similar to other creational design patterns, the factory design pattern attempts to encapsulate the logic for creating variants of <code>Car</code> instances in one well-defined <code>CarFactory</code> class interface.
+</p>
+<p>
+This approach abstracts how a <code>Car</code> instance gets created, making it possible to isolate the client from having to know how the instances get “assembled”. For example, if the specification requires that a <code>Calliope</code> car object should have a particular <code>Engine</code>, <code>Battery</code> and <code>Tire</code> components, the <code>CarFactory</code> interface will provide a <code>.create_calliope_car(…)</code> public method that puts the right components together and returns a calliope car object to the client.
+</p><p>
+The factory design pattern allows for a much cleaner codebase and any problem with our object creation logic can be easily isolated during debugging because now the creation of objects is independent of the client that uses them. you can learn more about the Factory Design Pattern <a href="https://refactoring.guru/design-patterns/factory-method">here</a>
+</p>
+</div>
+</div>
+</div>
+<div class="accordion" id="accordionExample">
+<div class="accordion-item">
+<h2 class="accordion-header anchored" id="headingOne">
+<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne" style="border-left:none;">
+Composition Over Inheritance
+</button>
+</h2>
+<div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample" style="">
+<div class="accordion-body">
+<strong class="text-secondary">Composition Over Inheritance</strong>
+<p>
+I used the design principle of “<a href="https://en.wikipedia.org/wiki/Composition_over_inheritance">composition over inheritance</a>” to address the pain point of complex and deep inheritance hierarchy in the codebase. In the current design, components are too tightly coupled making the codebase less modular. favoring composition - where we create a complete unit of components(<em>also known as composites</em>) that are independent of other components and assign them as attributes of a class that depends on them.
+</p>
+<p>
+For example cars in LYFT’s fleet will need <em>to have</em> <code>Engine</code> and <code>Battery</code> components to determine servicing needs. The inheritance approach would be to let the <code>Car</code> class subclass <code>Engine</code> and <code>Battery</code> classes. This way, the car instances would have all the attributes they need to determine servicing needs. This approach is not only error-prone, it also results in duplicated code.
+</p><p>
+With composition, we simply treat <code>Engine</code> and <code>Battery</code> as independent classes that can be used by other classes as shown by the <code>Car</code> class below:
+</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> Engine</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> Battery</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Car(Serviceable):</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    ....</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, engine: Engine, battery: Battery):</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.engine <span class="op">=</span> engine </span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.battery <span class="op">=</span> battery</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>
+For our use case, not only does choosing to favor composition over inheritance make the codebase more modular, but it also makes the design more intuitive as it models the real-world relationships between a car and its components. It feels more natural to say a Car <em><strong>HAS A</strong></em> Battery and an Engine than it is to say a Car <em><strong>IS A </strong></em>Battery and an Engine combined. You can learn more about the principle here: <a href="https://en.wikipedia.org/wiki/Composition_over_inheritance">Inheritance and Composition</a>
+</p>
+</div>
+</div>
+</div>
+</div>
+<p>
+After these considerations I used the UML diagram to propose the new design changes. The final design was submitted for review and approval. The <a href="https://en.wikipedia.org/wiki/Unified_Modeling_Language">UML diagram</a> below shows the proposed changes to the codebase.
+</p>
+</div></div></section>
+<section id="after-backend-logic-redesign" class="level4">
+<h4 class="anchored" data-anchor-id="after-backend-logic-redesign">After Backend Logic Redesign</h4>
+<p><img src="https://github.com/Simontagbor/forage-lyft-starter-repo/assets/62922135/688433b2-60e7-474a-8414-38e28c0dfd70" alt="Updated Design - LYFT Rental Fleet logistics System Component (1)" style="width:100%;height:60%;"></p>
+</section>
+</section>
+<section id="codebase-refactoring" class="level3">
+<h3 class="anchored" data-anchor-id="codebase-refactoring">2. Codebase Refactoring</h3>
+<p>
+After sharing the new design and getting the green light to implement it, I refactored the codebase based on the new design.
+</p>
+<p>
+The new codebase has the following updates:
+</p>
+<section id="new-directory-structure-after-refactoring" class="level4">
+<h4 class="anchored" data-anchor-id="new-directory-structure-after-refactoring">New Directory Structure After Refactoring</h4>
+<p>
+I restructured the codebase to make it more organized and maintainable. The new directory structure is as follows:
+</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">├──</span> .</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">│</span>   ├── serviceable.py</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="ex">│</span>   ├── car.py</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="ex">│</span>   ├── car_factory.py</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="ex">│</span>   ├── .gitingore</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="ex">│</span>   ├── README.md</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>   <span class="ex">├──</span> battery</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>   <span class="kw">|</span>   <span class="kw">|</span><span class="ex">──</span> __init__.py</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>   <span class="kw">|</span>   <span class="ex">├──</span> base_battery.py</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>   <span class="kw">|</span>   <span class="ex">├──</span> spindler_battery.py</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>   <span class="kw">|</span>   <span class="ex">├──</span> nubbin_battery.py</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>   <span class="ex">├──</span> engine</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>   <span class="kw">|</span>   <span class="kw">|</span><span class="ex">──</span> __init__.py</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>   <span class="kw">|</span>   <span class="ex">├──</span> base_engine.py</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>   <span class="kw">|</span>   <span class="ex">├──</span> capulet_engine.py</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>   <span class="kw">|</span>   <span class="ex">├──</span> wiloughby_engine.py</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>   <span class="kw">|</span>   <span class="kw">|</span><span class="ex">──</span> sternman_engine.py</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>   <span class="ex">├──</span> test</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>   <span class="kw">|</span>   <span class="ex">├──</span> __init__.py</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>   <span class="kw">|</span>   <span class="ex">├──</span> test_car.py</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>   <span class="ex">├──</span> utils</span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>   <span class="kw">|</span>   <span class="kw">|</span><span class="ex">──</span> __init__.py</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>   <span class="kw">|</span>   <span class="ex">├──</span> input_validator.py</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>
+The new structure is now more organized and maintainable.
+</p>
+<p>
+Based on the <a href="https://refactoring.guru/design-patterns/factory-method">Factory Method Pattern</a>, We will not need to create new models to represent new fleets of cars. We can simply create a new class that inherits from the base class and implement the methods that are specific to the new fleet of cars. we will no longer need the <code>/engine/models/</code> directory where these specialized car models were defined.
+</p>
+<p>
+The new structure also includes:
+</p>
+<ul class="list-group">
+<li class="list-group-item d-flex justify-content-between align-items-center">
+<ul class="task-list">
+<li><input type="checkbox" checked="">A <code>battery</code> directory to define battery components for car objects.</li>
+<li><input type="checkbox" checked="">A <code>utils</code> directory to define input validation and other helper functions for creating components and cars.</li>
+<li><input type="checkbox" checked="">Removal of the <code>engine/model</code> directory.</li>
+<li><input type="checkbox" checked="">Updated <code>engine</code> directory files to reflect the new design.</li>
+<li><input type="checkbox" checked="">A <code>car.py</code> module to reflect the new design.</li>
+<li><input type="checkbox" checked="">A <code>car_factory.py</code> module to leverage the factory method and strategy design patterns.</li>
+<li><input type="checkbox" checked="">A <code>serviceable.py</code> module to define an interface for different types of vehicles.</li>
+</ul>
+</li></ul></section>
+</section>
+<section id="extensive-unit-testing-of-the-codebase" class="level3">
+<h3 class="anchored" data-anchor-id="extensive-unit-testing-of-the-codebase">3. Extensive Unit testing of the Codebase</h3>
+<p>I wrote unit tests to test the new codebase. The unit tests are located in the <code>test</code> directory. The unittests cover the following:</p>
+<ul class="list-group">
+<li class="list-group-item d-flex justify-content-between align-items-center">
+Test the creation of different types of vehicles. <span>✅</span>
+</li>
+<li class="list-group-item d-flex justify-content-between align-items-center">
+Test the creation of different types of engines. <span>✅</span>
+</li>
+<li class="list-group-item d-flex justify-content-between align-items-center">
+Test the creation of different types of batteries. <span>✅</span>
+</li>
+<li class="list-group-item d-flex justify-content-between align-items-center">
+Test that the Car class is correctly implemented. <span>✅</span>
+</li>
+<li class="list-group-item d-flex justify-content-between align-items-center">
+Test that the Base Engine and Base Battery classes are correctly implemented. <span>✅</span>
+</li>
+<li class="list-group-item d-flex justify-content-between align-items-center">
+Test that the derived classes from the Base Engine and Base Battery classes are correctly implemented. <span>✅</span>
+</li>
+<li class="list-group-item d-flex justify-content-between align-items-center">
+Test the input validation for creating components and cars. <span>✅</span>
+</li>
+</ul>
+<section id="testing-approach" class="level4">
+<h4 class="anchored" data-anchor-id="testing-approach">Testing Approach</h4>
+<p>
+I mostly wrote standard unit tests, however, in some cases I used <code>@patch</code>decorator to mock the creation of different types of vehicles, engines, and batteries using the <code>Factory Method Pattern</code>- Implemented Via the <code>car_factory.py</code> module. I did that to ensure that the tests are independent of the client that uses them.
+</p>
+<p>
+Mocking the creation of objects allowed me to focus on testing the functionality of the code in isolation, without relying on the specific details of the instantiated objects.
+</p>
+</section>
+<section id="test-coverage" class="level4">
+<h4 class="anchored" data-anchor-id="test-coverage">Test Coverage</h4>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/2d26356f-1-image-2.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Test Coverage Report by coverage Python package</figcaption>
+</figure>
+</div>
+<p>
+see the full test coverage report <a href="https://simontagbor.github.io/lyfy-test-coverag-report/index.html">here</a>
+</p>
+<p>
+In total, the code coverage is about 99% and all tests 71 tests passed. The only module not tested is the <code>serviceable.py</code> which is an interface for serviceable objects like cars. I can safely assume that the interface is correctly implemented since all the derived classes from the interface are acting as expected.
+</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python3</span> <span class="at">-m</span> unittest <span class="at">-v</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/2d26356f-2-image-3.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Results from Running Uittest in Verbose mode</figcaption>
+</figure>
+</div>
+</section>
+</section>
+<section id="task-4---implement-new-tire-servicing-criteria" class="level3">
+<h3 class="anchored" data-anchor-id="task-4---implement-new-tire-servicing-criteria">Task 4 - Implement New Tire Servicing Criteria</h3>
+<p>
+Now that the codebase is more maintainable and scalable, I implemented new tire servicing criteria. However, I used the <a href="http://www.jamesshore.com/v2/books/aoad1/test_driven_development">Test-Driven Development (TDD)</a> approach to implement the new tire servicing criteria.
+</p>
+<section id="test-driven-development-tdd-approach" class="level4">
+<h4 class="anchored" data-anchor-id="test-driven-development-tdd-approach">Test-Driven Development (TDD) Approach</h4>
+<p>
+Test-driven development <a href="http://www.jamesshore.com/v2/books/aoad1/test_driven_development">(TDD)</a> is a software development process that relies on the repetition of a very short development cycle: first, the developer writes an (initially failing) automated test case that defines a desired improvement or new function, then produces the minimum amount of code to pass that test, and finally refactors the new code to acceptable standards.
+</p>
+<section id="my-steps" class="level5">
+<h5 class="anchored" data-anchor-id="my-steps">My Steps</h5>
+<ol>
+<li>
+Update the <code>test_car.py</code> module to include a new test case for the new tire servicing criteria.
+</li>
+<li>
+Add new tests for tire objects and tire servicing criteria.
+</li>
+<li>
+Run the tests to ensure that the new tests fail.
+</li>
+<li>
+Implement the new tire servicing criteria in the <code>car.py</code> module by ensuring that the car class has tire attributes. Implement tire-related classes and tire servicing criteria in the <code>tire</code> directory.
+</li>
+<li>
+Run the tests to ensure that the new tests pass.
+</li>
+</ol>
+</section>
+</section>
+</section>
+</section>
+<section id="results" class="level2">
+<h2 class="anchored" data-anchor-id="results">Results</h2>
+<p>
+After completing the tasks, I achieved the following results:
+</p>
+<div class="card text-white bg-primary mb-3" style="max-width: 20rem;">
+<div class="card-header">
+Results
+</div>
+<div class="card-body">
+<ul class="list-group">
+<li class="list-group-item d-flex justify-content-between align-items-center">
+The backend Business Logic for the Fleet Management System is now Modular and Scalable. <span>⭐</span>
+</li>
+<li class="list-group-item d-flex justify-content-between align-items-center">
+The codebase now has a <a href="https://simontagbor.github.io/lyfy-test-coverag-report/index.html">test coverage</a> of 99%. <span>⭐</span>
+</li>
+<li class="list-group-item d-flex justify-content-between align-items-center">
+The new tire servicing criteria were implemented and tested to spec. <span>⭐</span>
+</li>
+<li class="list-group-item d-flex justify-content-between align-items-center">
+The codebase is now well documented to improve collaboration with other developers. <span>⭐</span>
+</li>
+</ul>
+</div>
+</div>
+<section id="sanitized-codebase-at-a-glance" class="level3">
+<h3 class="anchored" data-anchor-id="sanitized-codebase-at-a-glance">Sanitized Codebase at a Glance</h3>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>├── .</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>│   ├── serviceable.py</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>│   ├── car.py</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>│   ├── car_factory.py</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>│   ├── .gitingore</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>│   ├── README.md</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="op">|</span>   ├── battery</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="op">|</span>   <span class="op">|</span>   <span class="op">|</span>── <span class="fu">__init__</span>.py</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="op">|</span>   <span class="op">|</span>   ├── base_battery.py</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="op">|</span>   <span class="op">|</span>   ├── spindler_battery.py</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="op">|</span>   <span class="op">|</span>   ├── nubbin_battery.py</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="op">|</span>   ├── engine</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="op">|</span>   <span class="op">|</span>   <span class="op">|</span>── <span class="fu">__init__</span>.py</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="op">|</span>   <span class="op">|</span>   ├── base_engine.py</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="op">|</span>   <span class="op">|</span>   ├── capulet_engine.py</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="op">|</span>   <span class="op">|</span>   ├── wiloughby_engine.py</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="op">|</span>   <span class="op">|</span>   <span class="op">|</span>── sternman_engine.py</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a><span class="op">|</span>   ├── tire</span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a><span class="op">|</span>   <span class="op">|</span>   <span class="op">|</span>── <span class="fu">__init__</span>.py</span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a><span class="op">|</span>   <span class="op">|</span>   ├── base_tire.py</span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a><span class="op">|</span>   <span class="op">|</span>   ├── carrigan_tire.py</span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a><span class="op">|</span>   <span class="op">|</span>   ├── octo_prime_tire.py</span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a><span class="op">|</span>   ├── test</span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a><span class="op">|</span>   <span class="op">|</span>   ├── <span class="fu">__init__</span>.py</span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a><span class="op">|</span>   <span class="op">|</span>   ├── test_battery</span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a><span class="op">|</span>   <span class="op">|</span>   <span class="op">|</span>   ├── test_battery.py</span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a><span class="op">|</span>   <span class="op">|</span>   ├── test_car</span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a><span class="op">|</span>   <span class="op">|</span>   <span class="op">|</span>   ├── <span class="fu">__init__</span>.py</span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a><span class="op">|</span>   <span class="op">|</span>   <span class="op">|</span>   ├── test_car.py</span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a><span class="op">|</span>   <span class="op">|</span>   <span class="op">|</span>   ├── test_car_factory.py</span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a><span class="op">|</span>   <span class="op">|</span>   ├── test_engine</span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a><span class="op">|</span>   <span class="op">|</span>   <span class="op">|</span>   ├── <span class="fu">__init__</span>.py</span>
+<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a><span class="op">|</span>   <span class="op">|</span>   <span class="op">|</span>   ├── test_engine.py</span>
+<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a><span class="op">|</span>   <span class="op">|</span>   ├── test_tire</span>
+<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a><span class="op">|</span>   <span class="op">|</span>   <span class="op">|</span>   ├── <span class="fu">__init__</span>.py</span>
+<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a><span class="op">|</span>   <span class="op">|</span>   <span class="op">|</span>   ├── test_tire.py</span>
+<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a><span class="op">|</span>   <span class="op">|</span>   ├── test_utils</span>
+<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a><span class="op">|</span>   <span class="op">|</span>   <span class="op">|</span>   ├── <span class="fu">__init__</span>.py</span>
+<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a><span class="op">|</span>   <span class="op">|</span>   <span class="op">|</span>   ├── test_input_validator.py</span>
+<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a><span class="op">|</span>   ├── utils</span>
+<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a><span class="op">|</span>   <span class="op">|</span>   <span class="op">|</span>── <span class="fu">__init__</span>.py</span>
+<span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a><span class="op">|</span>   <span class="op">|</span>   ├── input_validator.py</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+</section>
+<section id="key-learning-outcomes" class="level2 column-page">
+<h2 class="anchored" data-anchor-id="key-learning-outcomes">Key Learning Outcomes</h2>
+<p>
+I enjoyed working on this project and learned a lot about the following:
+</p>
+<ol>
+<li>
+<p>
+<strong>Design Patterns</strong>: I learned about different design patterns such as the Factory Method Pattern and Strategy Pattern. I learned how to use these patterns to create a more scalable and maintainable codebase. I will always have it in mind that different design patterns can be used to solve different problems and understanding the problem domain is key to choosing the right design pattern.
+</p>
+</li>
+<li>
+<p>
+<strong>Test-Driven Development (TDD)</strong>: having known about the concept for a while, I finally got to use it in my workflow as a developer. I saw firsthand that TDD is a great way to ensure that the code is working as expected and to catch bugs early in the development process.
+</p>
+</li>
+<li>
+<p>
+<strong>Unit Testing</strong>: I reinforced my understanding of unit testing techniques and I am now committed to writing extensive unit tests in future projects. I also learned how to use the <code><span class="citation" data-cites="patch">@patch</span></code> decorator from the <code>unittest</code> module to mock the creation of objects. I also discovered a neat way to measure the coverage of tests inside the codebase using the <code>coverage</code> package.
+</p>
+</li>
+</ol>
+<p>
+Feel free to reach out to me on <a href="https://twitter.com/clawd_johan">X</a> or <a href="https://www.linkedin.com/in/tagbor-simon-gabriel/">LinkedIn</a> if you have any questions or feedback about this project. I would love to hear from you.
+</p>
+</section>
+<!-- nav modals -->
+<script src="assets/GithubPinner.js"></script>
+
+<div class="modal-about">
+<div class="modal-dialogue">
+<div class="modal-content">
+  <div class="modal-header">
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+    <span aria-hidden="true"></span>
+    </button>
+    <h5 class="modal-title">Learning New Skills, One Project at a Time..</h5>
+    </div>
+  <!-- Modal content -->
+<div class="github-pinner flat" data="https://github.com/Simontagbor" style="visibility: hidden;"></div>
+<div class="developer-info">
+<p>
+This is a brief description of the developer I am excited for what lies ahead this is going to look great!!
+</p>
+<div class="icon-container">
+<p><a href="https://twitter.com/clawd_johan"><img id="social-icon" src="assets/x.png" alt="X Icon"></a> <a href="https://github.com/Simontagbor"><img id="social-icon" src="assets/github.png" alt="Github Icon"></a> <a href="https://www.linkedin.com/in/tagbor-simon-gabriel/"><img id="social-icon" src="assets/linkedin.png" alt="LinkedIn Icon"></a></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="modal-projects">
+<div class="modal-dialogue">
+<div class="modal-content">
+  <div class="modal-header">
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+    <span aria-hidden="true"></span>
+    </button>
+    <h5 class="modal-title">Checkout These Projects</h5>
+    </div>
+  <!-- Modal content -->
+<div class="github-pinner flat" data="https://github.com/Simontagbor/forage-lyft-starter-repo" style="visibility: hidden;"></div>
+<div class="github-pinner flat" data="https://github.com/Simontagbor/forage-lyft-starter-repo" style="visibility: hidden;"></div>
+<div class="github-pinner flat" data="https://github.com/Simontagbor/forage-lyft-starter-repo" style="visibility: hidden;"></div>
+</div>
+</div>
+</div>
+
+<div class="modal-summary">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true"></span>
+      </button>
+    <h5 class="modal-title">
+    Project Summary
+    </h5>
+  
+  <p>
+  After successfully implementing the redesigned codebase, here are some notable outcomes:
+  </p>
+  <ul class="list-group">
+  <li class="list-group-item d-flex justify-content-between align-items-center">
+  The Business Logic components are now loosely coupled. <span>⭐</span>
+  </li>
+  <li class="list-group-item d-flex justify-content-between align-items-center">
+  The Re-designed Codebase now has a test coverage of 99%. <span>⭐</span>
+  </li>
+  <li class="list-group-item d-flex justify-content-between align-items-center">
+  The Codebase Now Integrates Smoothly with New Components.<span>⭐</span>
+  </li>
+  <li class="list-group-item d-flex justify-content-between align-items-center">
+  The codebase is now well-documented to improve collaboration. <span>⭐</span>
+  </li>
+  </ul>
+  </div>
+  </div>
+  </div>
+</div>
+
+
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<script src="assets/modal.js"></script>
+<script src="assets/GitHubPinner.js"></script>
+</div> <!-- /content -->
+
+
+
+</body></html>
