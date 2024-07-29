@@ -129,7 +129,7 @@ Mocking the creation of objects allows me to focus on testing the functionality 
 
 #### Test Coverage
 
-In total, the code coverage is about 98% and all tests 71 tests passed. The only module not tested is the `serviceable.py` which is an interface for serviceable objects like cars. I can safely assume that the interface is correctly implemented since all the derived classes from the interface are acting as expected.
+In total, the [code coverage](https://simontagbor.github.io/lyfy-test-coverag-report/) is about 99% and all tests 71 tests passed. The only module not tested is the `serviceable.py` which is an interface for serviceable objects like cars. I can safely assume that the interface is correctly implemented since all the derived classes from the interface are acting as expected.
 
 ```bash
 
@@ -156,7 +156,7 @@ Now that the codebase is more maintainable and scalable, I implemented a new tir
 ###### Test Results
 ![image of test coverage report](<Screenshot 2024-03-09 210813.png>)
 
-see full test coverage report [here]()
+see full test coverage report [here](https://simontagbor.github.io/lyfy-test-coverag-report/)
 
 #### Final Structure of Codebase
 
