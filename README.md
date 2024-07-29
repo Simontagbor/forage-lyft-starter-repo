@@ -156,7 +156,7 @@ Now that the codebase is more maintainable and scalable, I implemented a new tir
 ###### Test Results
 ![image of test coverage report](<Screenshot 2024-03-09 210813.png>)
 
-see full test coverage report [here](https://simontagbor.github.io/lyfy-test-coverag-report/)
+#### see full test coverage report [here](https://simontagbor.github.io/lyfy-test-coverag-report/)
 
 #### Final Structure of Codebase
 
