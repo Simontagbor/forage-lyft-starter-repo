@@ -7,6 +7,7 @@
 ## Introduction
 
 > I took a job simulation as a junior backend software engineer at Lyft on [Forage](https://www.theforage.com/virtual-experience/xSw9echtixLAoPdsH/lyft/back-end-engineering-he82/). The goal was straight forward: redesign the existing backend business logic of Lyft's Rental Fleet logistics system and refactor the codebase to make it more maintainable and scalable. I also wrote extensive unittests and implemented new features for the rental fleet logistics System.
+
 <section class="intro-section"> 
 <div id="myModal" class="modal">
 <div class="modal-content">
@@ -18,6 +19,7 @@ Executive Summary
 </div>
 </div>
 </section>
+
 ## Situation
 
 I inherited a codebase from a previous Engineer who started working on a new system responsible for managing the servicing and maintenance of different types of vehicles in LYFT's rental fleet. The previous engineer who worked on the project had to be assigned to another project.
